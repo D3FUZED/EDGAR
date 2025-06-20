@@ -1,0 +1,29 @@
+name: EDGAR IPO Watch
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install requests feedparser
+
+      - name: Run notifier
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          USER_AGENT: "SEC WATCHER"
+          CHECK_INTERVAL: "3600"
+          STATE_FILE: "seen_entries.json"
+        run: |
+          python edgar_ipo_notifier.py
