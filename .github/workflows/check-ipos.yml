@@ -2,7 +2,9 @@ name: EDGAR IPO Watch
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    # Runs at minute 0 of every hour (UTC)
+    - cron: '*/20 * * * *'
+  workflow_dispatch:
 
 jobs:
   notify:
@@ -17,9 +19,10 @@ jobs:
 
       - name: Install dependencies
         run: |
+          pip install --upgrade pip
           pip install requests feedparser
 
-      - name: Run notifier
+      - name: Run EDGAR IPO notifier
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           USER_AGENT: "SEC WATCHER"
