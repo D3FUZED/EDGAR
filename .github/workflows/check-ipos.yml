@@ -12,15 +12,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
       - name: Install dependencies
         run: |
           pip install --upgrade pip
           pip install requests feedparser
+
+      - name: Test Discord webhook
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          curl -X POST \
+            -H 'Content-Type: application/json' \
+            --data '{"content":"🔔 [Test] EDGAR IPO Notifier is up and running!"}' \
+            ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Run EDGAR IPO notifier
         env:
