@@ -29,4 +29,4 @@ jobs:
           CHECK_INTERVAL: "1200"
           STATE_FILE: "seen_entries.json"
         run: |
-          EDGAR.py
+          python EDGAR.py
