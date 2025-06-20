@@ -122,6 +122,7 @@ def handle_industry(entry):
 def main():
     # Company-specific filings
     for name, cik in CIKS.items():
+        logging.info("Checking filings for %s (CIK %s)…", name, cik)
         for acc, form, date, doc in fetch_filings(cik):
             key = ("CIK", name, acc)
             if key not in seen and form in ("S-1","F-1","D-1"):
@@ -129,6 +130,7 @@ def main():
             seen.add(key)
 
     # Industry RSS filings
+    logging.info("Checking industry RSS entries…")
     for entry in fetch_rss_entries():
         key = ("RSS", entry.id)
         text= (entry.title+entry.summary).lower()
