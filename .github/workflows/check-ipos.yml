@@ -26,7 +26,7 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           USER_AGENT: "SEC WATCHER"
-          CHECK_INTERVAL: "3600"
+          CHECK_INTERVAL: "1200"
           STATE_FILE: "seen_entries.json"
         run: |
           python edgar_ipo_notifier.py
