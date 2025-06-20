@@ -2,7 +2,7 @@ name: EDGAR IPO Watch
 
 on:
   schedule:
-    # Runs at minute 0 of every hour (UTC)
+    # Runs every 20 minutes (UTC)
     - cron: '*/20 * * * *'
   workflow_dispatch:
 
@@ -25,8 +25,7 @@ jobs:
       - name: Run EDGAR IPO notifier
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          USER_AGENT: "SEC WATCHER"
-          CHECK_INTERVAL: "1200"
-          STATE_FILE: "seen_entries.json"
+          USER_AGENT:       "SEC WATCHER"
+          STATE_FILE:       "seen_entries.json"
         run: |
           python EDGAR.py
