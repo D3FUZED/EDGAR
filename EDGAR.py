@@ -16,6 +16,7 @@ CIKS = {
     "Gemini": "0001845748",
     "Ripple": "0001551332",
     "BitGo":  "0001835212",
+    "Waymo":  "0001652044", # via Alphabet Inc. parent CIK
 }
 EDGAR_RSS_URL = "https://www.sec.gov/Archives/edgar/usgaap.rss"
 RSS_KEYWORDS  = ["crypto", "blockchain"]
